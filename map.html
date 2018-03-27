@@ -77,6 +77,11 @@
    <div id="map" draggable="true" onmousedown="start(event)" onmouseup="pan(event)" ontouchstart="start(event)" ontouchend="pan(event)"></div>
    <button type="button" class="button" onCLick="zoomIn()">+</button>
    <button type="button" class="button" onCLick="zoomOut()">-</button>
+
+   <div>
+     <p id="position"></p>
+   </div>
+   
    <script>
     var map;
     function initMap() {
@@ -99,75 +104,92 @@
         title: "KTH"
       });
       marker.addListener('click', toggleBounce);
-        
-        var contentString = "<p>Welcome to Royal Institute of technology!";
-        var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
-        
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
-
-      google.maps.event.addListener(map, 'click', function(event) {
-        addMarker(event.latLng, map);
+      
+      var contentString = "<p>Welcome to Royal Institute of technology!";
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
       });
-    }
-
-    function zoomIn() {
-      map.setZoom(map.zoom + 1)
-    }
-
-    function zoomOut() {
-      map.setZoom(map.zoom - 1)
-    }
-
-    var x_start;
-    var y_start;
-
-    function start(event) {
-      x_start = event.clientX;
-      y_start = event.clientY;
-    }
-
-
-    function pan(event) {
-      console.log("slut");
-      var xpos = x_start - event.clientX;
-      var ypos = y_start - event.clientY;
-      map.panBy(xpos, ypos);
-    }
-
-    function addMarker(location, map) {
-      var marker = new google.maps.Marker({
-        position: location,
-        map: map,
-        animation: google.maps.Animation.DROP,
+      
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
       });
-      marker.addListener('click', toggleBounce);
-    }
+
+google.maps.event.addListener(map, 'click', function(event) {
+  addMarker(event.latLng, map);
+});
+}
+
+function zoomIn() {
+  map.setZoom(map.zoom + 1)
+}
+
+function zoomOut() {
+  map.setZoom(map.zoom - 1)
+}
+
+var x_start;
+var y_start;
+
+function start(event) {
+  x_start = event.clientX;
+  y_start = event.clientY;
+}
 
 
-    function toggleBounce() {
-      if (marker.getAnimation() !== null) {
-        marker.setAnimation(null);
-      } else {
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-      }
-    }
+function pan(event) {
+  console.log("slut");
+  var xpos = x_start - event.clientX;
+  var ypos = y_start - event.clientY;
+  map.panBy(xpos, ypos);
+}
+
+function addMarker(location, map) {
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map,
+    animation: google.maps.Animation.DROP,
+  });
+  marker.addListener('click', toggleBounce);
+}
 
 
-    function myFunction() {
-      myVar = setTimeout(showPage, 1000);
-    }
+function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
 
-    function showPage() {
-      document.getElementById("loader").style.display = "none";
-      document.getElementById("map").style.display = "block";
-    }
+
+function myFunction() {
+  myVar = setTimeout(showPage, 1000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("map").style.display = "block";
+}
 
 
-  </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANJSROmnM72JZN35SRpGfFFTx7P4feqic&callback=initMap"></script>
+var position = document.getElementById("position");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    position.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+function showPosition(position) {
+  position.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+}
+console.log(position);
+console.log(navigator.geolocation.getCurrentPosition(showPosition));
+
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANJSROmnM72JZN35SRpGfFFTx7P4feqic&callback=initMap"></script>
 </body>
 </html>
