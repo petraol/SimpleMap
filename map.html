@@ -13,13 +13,18 @@
        * element that contains the map. */
       #map {
         height: 100%;
+          width: 100%;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
+        height: 95%;
+        margin: 20;
+        padding: 20;
       }
+      .button {
+            margin: 20;
+            padding: 20;
+        }
       loader {
       border: 16px solid #f3f3f3; /* Light grey */
       border-top: 16px solid #3498db; /* Blue */
@@ -33,13 +38,9 @@
   <body>
 
      <div class="loader"></div> 
-
-      <button type="button" onCLick="zoomIn()">+</button>
-      <p>Hej</p>
-      <button type="button" onCLick="zoomOut()">-</button>
-      <div id="map" draggable="true" onmousedown="start(event)" onmouseup="pan(event)">
-        
-      </div>
+      <div id="map" draggable="true" onmousedown="start(event)" onmouseup="pan(event)"></div>
+      <button type="button" class="button" onCLick="zoomIn()">+</button>
+      <button type="button" class="button" onCLick="zoomOut()">-</button>
     <script>
         var map;
         function initMap() {
