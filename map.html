@@ -108,12 +108,15 @@
   <body onload="myFunction()" style="margin:0;">
 
       <div id="loader"></div> 
-      <div id="map" draggable="true" onmousedown="start(event)" onmouseup="pan(event)" ontouchstart="start(event)" ontouchend="pan(event)"></div>  
+      <div id="map" draggable="true" onmousedown="start(event)" onmouseup="pan(event)" ontouchstart="start(event)" ontouchend="pan(event)"></div> 
+      
+      <button type="button" class="button" onCLick="getLocation()" id ="location">Find my location</button>
+      
       <button type="button" class="button" onCLick="zoomIn()" id ="zoomIn">+</button>
       <button type="button" class="button" onCLick="zoomOut()" id="zoomOut">-</button>
       
       <button type="button" class="button" onCLick="up()" id="up">^</button>
-      <button type="button" class="button" onCLick="left()" id="left"><</button>
+      <button type="button" class="button" onCLick="left()" id="left">vänster</button>
       <button type="button" class="button" onCLick="right()" id="right">></button>
       <button type="button" class="button" onCLick="down()" id="down">v</button>
         
@@ -123,10 +126,11 @@
       <button type="button" class="button" onCLick="showCoffeePlace()">Coffee here</button>
 
    <div>
-     <p id="position"></p>
+     <p id="pos"></p>
    </div>
    
    <script>
+
     var map;
     function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
@@ -161,6 +165,7 @@
 google.maps.event.addListener(map, 'click', function(event) {
   addMarker(event.latLng, map);
 });
+
 }
 
 function zoomIn() {
@@ -197,7 +202,6 @@ function start(event) {
 
 
 function pan(event) {
-  console.log("slut");
   var xpos = x_start - event.clientX;
   var ypos = y_start - event.clientY;
   map.panBy(xpos, ypos);
@@ -232,19 +236,24 @@ function showPage() {
 }
 
 
-var position = document.getElementById("position");
+var pos = document.getElementById("pos");
 
 function getLocation() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
+      console.log("det funkar, hoppar till showposition")
+      navigator.geolocation.getCurrentPosition(showPosition);
+      console.log("klar med showposition");
+      
   } else {
-    position.innerHTML = "Geolocation is not supported by this browser.";
+    pos.innerHTML = "Geolocation is not supported by this browser.";
   }
 }
 function showPosition(position) {
-  position.innerHTML = "Latitude: " + position.coords.latitude +
-  "<br>Longitude: " + position.coords.longitude;
+    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    map.panTo(latLng);
+    addMarker(latLng, map);
 }
+<<<<<<< HEAD
 console.log(position);
 console.log(navigator.geolocation.getCurrentPosition(showPosition));
 
@@ -348,6 +357,8 @@ console.log(navigator.geolocation.getCurrentPosition(showPosition));
         }
       });
     }
+=======
+>>>>>>> location
 
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANJSROmnM72JZN35SRpGfFFTx7P4feqic&callback=initMap&libraries=places""></script>
