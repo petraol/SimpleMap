@@ -22,9 +22,37 @@
         padding: 0;
         background: grey;
       }
-      .button {
-        margin-top: 20;
+      #zoomIn {
+          position : absolute;
+          top: 94%;
+          left: 5%;
       }
+      #zoomOut {
+          position : absolute;
+          top: 94%;
+          left: 3%;
+      }
+      #left {
+          position : absolute;
+          top: 94%;
+          left: 10%;
+      }
+      #down {
+          position : absolute;
+          top: 95.5%;
+          left: 12.5%;
+      }
+      #right {
+          position : absolute;
+          top: 94%;
+          left: 15%;
+      }
+      #up {
+          position : absolute;
+          top: 92%;
+          left: 12.5%;
+      }
+      
       #loader {
         position: absolute;
         left: 50%;
@@ -73,10 +101,15 @@
   </head>
   <body onload="myFunction()" style="margin:0;">
 
-   <div id="loader"></div> 
-   <div id="map" draggable="true" onmousedown="start(event)" onmouseup="pan(event)" ontouchstart="start(event)" ontouchend="pan(event)"></div>
-   <button type="button" class="button" onCLick="zoomIn()">+</button>
-   <button type="button" class="button" onCLick="zoomOut()">-</button>
+      <div id="loader"></div> 
+      <div id="map" draggable="true" onmousedown="start(event)" onmouseup="pan(event)" ontouchstart="start(event)" ontouchend="pan(event)"></div>  
+      <button type="button" class="button" onCLick="zoomIn()" id ="zoomIn">+</button>
+      <button type="button" class="button" onCLick="zoomOut()" id="zoomOut">-</button>
+      
+      <button type="button" class="button" onCLick="up()" id="up">^</button>
+      <button type="button" class="button" onCLick="left()" id="left"><</button>
+      <button type="button" class="button" onCLick="right()" id="right">></button>
+      <button type="button" class="button" onCLick="down()" id="down">v</button>
 
    <div>
      <p id="position"></p>
@@ -127,6 +160,22 @@ function zoomOut() {
   map.setZoom(map.zoom - 1)
 }
 
+function right() {
+    map.panBy(100, 0);
+}   
+
+function left() {
+    map.panBy(-100, 0);
+}
+       
+function up() {
+    map.panBy(0, -100);
+}
+    
+function down() {
+    map.panBy(0, 100);
+}
+       
 var x_start;
 var y_start;
 
