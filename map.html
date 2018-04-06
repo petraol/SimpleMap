@@ -248,8 +248,108 @@ function showPosition(position) {
 console.log(position);
 console.log(navigator.geolocation.getCurrentPosition(showPosition));
 
+     function showHedvigsPlace() {
+      var infowindow = new google.maps.InfoWindow();
+      var service = new google.maps.places.PlacesService(map);
+
+      service.getDetails({
+        placeId: 'ChIJYyrB_kidX0YRNkbkxVxhMbE'
+      }, function(place, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(
+              '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
+              place.rating + '</br>' + 'Website: ' + 
+              '<a href=' + place.website + '>' + 'Himmelska hundar' + '</a>'
+               + '<br>' + '</br>' + 
+              place.formatted_address + '</div>');
+            infowindow.open(map, this);
+          });
+        }
+      });
+    }
+
+    function showPetrasPlace() {
+
+      var infowindow = new google.maps.InfoWindow();
+      var service = new google.maps.places.PlacesService(map);
+
+      service.getDetails({
+        placeId: 'ChIJ29yfv1ydX0YRxfvb3T48q5U'
+      }, function(place, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(
+              '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
+              place.rating + '</br>' + 'Website: ' + 
+              '<a href=' + place.website + '>' + 'Spy Bar' + '</a>'
+               + '<br>' + '</br>' + 
+              place.formatted_address + '</div>');
+            infowindow.open(map, this);
+          });
+        }
+      });
+    }
+
+    function showSaladPlace() {
+      var infowindow = new google.maps.InfoWindow();
+      var service = new google.maps.places.PlacesService(map);
+
+      service.getDetails({
+        placeId: 'ChIJkxdoIUCdX0YR-qDZchTd8oA'
+      }, function(place, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(
+              '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
+              place.rating + '</br>' + 'Website: ' + 
+              '<a href=' + place.website + '>' + 'KTH Bibliotek' + '</a>'
+               + '<br>' + '</br>' + 
+              place.formatted_address + '</div>');
+            infowindow.open(map, this);
+          });
+        }
+      });
+    }
+
+    function showCoffeePlace() {
+       var infowindow = new google.maps.InfoWindow();
+      var service = new google.maps.places.PlacesService(map);
+
+      service.getDetails({
+        placeId: 'ChIJv7ezuG6dX0YRhybe0-Zx_aY'
+      }, function(place, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(
+              '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
+              place.rating + '</br>' + 'Website: ' + 
+              '<a href=' + place.website + '>' + 'Espresso House' + '</a>'
+               + '<br>' + '</br>' + 
+              place.formatted_address + '</div>');
+            infowindow.open(map, this);
+          });
+        }
+      });
+    }
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANJSROmnM72JZN35SRpGfFFTx7P4feqic&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANJSROmnM72JZN35SRpGfFFTx7P4feqic&callback=initMap&libraries=places""></script>
 </body>
 </html>
