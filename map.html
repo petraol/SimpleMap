@@ -23,40 +23,40 @@
         background: grey;
       }
       #zoomIn {
-          position : absolute;
-          padding: 0.5% 1%;
-          top: 92.5%;
-          left: 45%;
+        position : absolute;
+        padding: 0.5% 1%;
+        top: 92.5%;
+        left: 45%;
       }
       #zoomOut {
-          position : absolute;
-          padding: 0.5% 1%;
-          top: 92.5%;
-          left: 40%;
+        position : absolute;
+        padding: 0.5% 1%;
+        top: 92.5%;
+        left: 40%;
       }
       #left {
-          position : absolute;
-          padding: 0.5% 1%;
-          top: 92.5%;
-          left: 55%;
+        position : absolute;
+        padding: 0.5% 1%;
+        top: 92.5%;
+        left: 55%;
       }
       #down {
-          position : absolute;
-          padding: 0.5% 1%;
-          top: 95.5%;
-          left: 60%;
+        position : absolute;
+        padding: 0.5% 1%;
+        top: 95.5%;
+        left: 60%;
       }
       #right {
-          position : absolute;
-          padding: 0.5% 1%;
-          top: 92.5%;
-          left: 65%;
+        position : absolute;
+        padding: 0.5% 1%;
+        top: 92.5%;
+        left: 65%;
       }
       #up {
-          position : absolute;
-          padding: 0.5% 1%;
-          top: 89%;
-          left: 60%;
+        position : absolute;
+        padding: 0.5% 1%;
+        top: 89%;
+        left: 60%;
       }
       
       #loader {
@@ -73,6 +73,48 @@
         -webkit-animation: spin 2s linear infinite;
         animation: spin 2s linear infinite;
       }
+       /* Dropdown Button */
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    bottom: 100%;
+}
+
+/* Links inside the dropdown */
+.dropdown-content p {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;} 
 
       @-webkit-keyframes spin {
         0% { -webkit-transform: rotate(0deg); }
@@ -107,25 +149,29 @@
   </head>
   <body onload="myFunction()" style="margin:0;">
 
-      <div id="loader"></div> 
-      <div id="map" draggable="true" onmousedown="start(event)" onmouseup="pan(event)" ontouchstart="start(event)" ontouchend="pan(event)"></div> 
-      
-      <button type="button" class="button" onCLick="getLocation()" id ="location">Find my location</button>
-      
-      <button type="button" class="button" onCLick="zoomIn()" id ="zoomIn">+</button>
-      <button type="button" class="button" onCLick="zoomOut()" id="zoomOut">-</button>
-      
-      <button type="button" class="button" onCLick="up()" id="up">^</button>
-      <button type="button" class="button" onCLick="left()" id="left">vänster</button>
-      <button type="button" class="button" onCLick="right()" id="right">></button>
-      <button type="button" class="button" onCLick="down()" id="down">v</button>
-        
-      <button type="button" class="button" onCLick="showHedvigsPlace()">Hedvig's favourite coffee shop</button>
-      <button type="button" class="button" onCLick="showPetrasPlace()">Petras bar</button>
-      <button type="button" class="button" onCLick="showSaladPlace()">Good salads!</button>
-      <button type="button" class="button" onCLick="showCoffeePlace()">Coffee here</button>
+    <div id="loader"></div> 
+    <div id="map" draggable="true" onmousedown="start(event)" onmouseup="pan(event)" ontouchstart="start(event)" ontouchend="pan(event)"></div> 
 
-   <div>
+    <button type="button" class="button" onCLick="getLocation()" id ="location">Find my location</button>
+
+    <button type="button" class="button" onCLick="zoomIn()" id ="zoomIn">+</button>
+    <button type="button" class="button" onCLick="zoomOut()" id="zoomOut">-</button>
+
+    <button type="button" class="button" onCLick="up()" id="up">^</button>
+    <button type="button" class="button" onCLick="left()" id="left">&lt;</button>
+    <button type="button" class="button" onCLick="right()" id="right">></button>
+    <button type="button" class="button" onCLick="down()" id="down">v</button>
+
+     <div class="dropdown">
+  <button onclick="dropDownClick()" class="dropbtn">Places</button>
+  <div id="myDropdown" class="dropdown-content">
+    <p onClick="showHedvigsPlace()">Hedvig's favourite coffee shop</p>
+    <p onClick="showPetrasPlace()">Petras bar</p>
+    <p onClick="showSaladPlace()">Good salads!</p>
+    <p onClick="showCoffeePlace()">Coffee here</p>
+  </div>
+</div> 
+    <div>
      <p id="pos"></p>
    </div>
    
@@ -162,101 +208,110 @@
         infowindow.open(map, marker);
       });
 
-google.maps.event.addListener(map, 'click', function(event) {
-  addMarker(event.latLng, map);
-});
+      google.maps.event.addListener(map, 'click', function(event) {
+        addMarker(event.latLng, map);
+      });
 
-}
+    }
 
-function zoomIn() {
-  map.setZoom(map.zoom + 1)
-}
+    function zoomIn() {
+      map.setZoom(map.zoom + 1)
+    }
 
-function zoomOut() {
-  map.setZoom(map.zoom - 1)
-}
+    function zoomOut() {
+      map.setZoom(map.zoom - 1)
+    }
 
-function right() {
-    map.panBy(100, 0);
-}   
+    function right() {
+      map.panBy(100, 0);
+    }   
 
-function left() {
-    map.panBy(-100, 0);
-}
-       
-function up() {
-    map.panBy(0, -100);
-}
+    function left() {
+      map.panBy(-100, 0);
+    }
+
+    function up() {
+      map.panBy(0, -100);
+    }
     
-function down() {
-    map.panBy(0, 100);
-}
-       
-var x_start;
-var y_start;
+    function down() {
+      map.panBy(0, 100);
+    }
 
-function start(event) {
-  x_start = event.clientX;
-  y_start = event.clientY;
-}
+    var x_start;
+    var y_start;
 
-
-function pan(event) {
-  var xpos = x_start - event.clientX;
-  var ypos = y_start - event.clientY;
-  map.panBy(xpos, ypos);
-}
-
-function addMarker(location, map) {
-  var marker = new google.maps.Marker({
-    position: location,
-    map: map,
-    animation: google.maps.Animation.DROP,
-  });
-  marker.addListener('click', toggleBounce);
-}
+    function start(event) {
+      x_start = event.clientX;
+      y_start = event.clientY;
+    }
 
 
-function toggleBounce() {
-  if (marker.getAnimation() !== null) {
-    marker.setAnimation(null);
-  } else {
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-  }
-}
+    function pan(event) {
+      var xpos = x_start - event.clientX;
+      var ypos = y_start - event.clientY;
+      map.panBy(xpos, ypos);
+    }
+
+    function addMarker(location, map) {
+      var marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        animation: google.maps.Animation.DROP,
+      });
+      marker.addListener('click', toggleBounce);
+    }
 
 
-function myFunction() {
-  myVar = setTimeout(showPage, 1000);
-}
+    function toggleBounce() {
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
 
-function showPage() {
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("map").style.display = "block";
-}
+
+    function myFunction() {
+      myVar = setTimeout(showPage, 1000);
+    }
+
+    function showPage() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("map").style.display = "block";
+    }
 
 
-var pos = document.getElementById("pos");
+    var pos = document.getElementById("pos");
 
-function getLocation() {
-  if (navigator.geolocation) {
-      console.log("det funkar, hoppar till showposition")
-      navigator.geolocation.getCurrentPosition(showPosition);
-      console.log("klar med showposition");
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+
+      } else {
+        pos.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+    function showPosition(position) {
+      var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      map.panTo(latLng);
+
+      var icon = {
+    url: 'https://cdn1.iconfinder.com/data/icons/pretty-office-part-13-simple-style/512/user-orange.png', // url
+    scaledSize: new google.maps.Size(40, 40), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(0, 0) // anchor
+  };
+
+    var marker = new google.maps.Marker({
+        map: map,
+        position: latLng,
+        icon: icon
+      });
       
-  } else {
-    pos.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
-function showPosition(position) {
-    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    map.panTo(latLng);
-    addMarker(latLng, map);
-}
-console.log(position);
-console.log(navigator.geolocation.getCurrentPosition(showPosition));
+    }
 
-     function showHedvigsPlace() {
+    function showHedvigsPlace() {
       var infowindow = new google.maps.InfoWindow();
       var service = new google.maps.places.PlacesService(map);
 
@@ -271,6 +326,7 @@ console.log(navigator.geolocation.getCurrentPosition(showPosition));
     placeId: 'ChIJYyrB_kidX0YRNkbkxVxhMbE'
   }, function(place, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
+      map.panTo(place.geometry.location);
       var marker = new google.maps.Marker({
         map: map,
         position: place.geometry.location,
@@ -287,6 +343,7 @@ console.log(navigator.geolocation.getCurrentPosition(showPosition));
       });
     }
   });
+
 }
 
 function showPetrasPlace() {
@@ -307,6 +364,7 @@ function showPetrasPlace() {
     placeId: 'ChIJ29yfv1ydX0YRxfvb3T48q5U'
   }, function(place, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
+      map.panTo(place.geometry.location);
       var marker = new google.maps.Marker({
         map: map,
         position: place.geometry.location,
@@ -337,6 +395,7 @@ function showSaladPlace() {
     placeId: 'ChIJkxdoIUCdX0YR-qDZchTd8oA'
   }, function(place, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
+      map.panTo(place.geometry.location);
       var marker = new google.maps.Marker({
         map: map,
         position: place.geometry.location,
@@ -373,6 +432,7 @@ function showCoffeePlace() {
     placeId: 'ChIJv7ezuG6dX0YRhybe0-Zx_aY'
   }, function(place, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
+      map.panTo(place.geometry.location);
       var marker = new google.maps.Marker({
         map: map,
         position: place.geometry.location,
@@ -390,7 +450,28 @@ function showCoffeePlace() {
     }
   });
 }
-     
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function dropDownClick() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+} 
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANJSROmnM72JZN35SRpGfFFTx7P4feqic&callback=initMap&libraries=places""></script>
 </body>
