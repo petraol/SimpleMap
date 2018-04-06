@@ -8,6 +8,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="/icon.png">
   <link rel="manifest" href="manifest.json">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <style>
       /* Always set the map height explicitly to define the size of the div
       * element that contains the map. */
@@ -20,43 +21,44 @@
         height: 94%;
         margin: 0.5%;
         padding: 0;
-        background: grey;
+        background: white;
+        font-family: 'Montserrat', sans-serif;
       }
       #zoomIn {
         position : absolute;
         padding: 0.5% 1%;
         top: 92.5%;
-        left: 45%;
+        left: 65%;
       }
       #zoomOut {
         position : absolute;
         padding: 0.5% 1%;
         top: 92.5%;
-        left: 40%;
+        left: 60%;
       }
       #left {
         position : absolute;
         padding: 0.5% 1%;
         top: 92.5%;
-        left: 55%;
+        left: 75%;
       }
       #down {
         position : absolute;
         padding: 0.5% 1%;
         top: 95.5%;
-        left: 60%;
+        left: 80%;
       }
       #right {
         position : absolute;
         padding: 0.5% 1%;
         top: 92.5%;
-        left: 65%;
+        left: 85%;
       }
       #up {
         position : absolute;
         padding: 0.5% 1%;
         top: 89%;
-        left: 60%;
+        left: 80%;
       }
       
       #loader {
@@ -73,14 +75,48 @@
         -webkit-animation: spin 2s linear infinite;
         animation: spin 2s linear infinite;
       }
+
+
+  .button {
+  background-color:#7892c2;
+  -moz-border-radius:28px;
+  -webkit-border-radius:28px;
+  border-radius:28px;
+  border:1px solid #4e6096;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-size:17px;
+  padding:16px 31px;
+  text-decoration:none;
+}
+.button:hover {
+  background-color:#476e9e;
+}
+.button:active {
+  position:relative;
+  top:1px;
+}
+
        /* Dropdown Button */
 .dropbtn {
-    background-color: #3498DB;
+    background-color:#7892c2;
     color: white;
     padding: 16px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+     -moz-border-radius:28px;
+  -webkit-border-radius:28px;
+  border-radius:28px;
+  border:1px solid #4e6096;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-size:17px;
+  padding:16px 31px;
+  text-decoration:none;
 }
 
 /* Dropdown button on hover & focus */
@@ -163,7 +199,7 @@
     <button type="button" class="button" onCLick="down()" id="down">v</button>
 
      <div class="dropdown">
-  <button onclick="dropDownClick()" class="dropbtn">Places</button>
+  <button onclick="dropDownClick()" class="dropbtn">Places ^ </button>
   <div id="myDropdown" class="dropdown-content">
     <p onClick="showHedvigsPlace()">Hedvig's favourite coffee shop</p>
     <p onClick="showPetrasPlace()">Petras bar</p>
