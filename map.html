@@ -78,6 +78,11 @@
    <button type="button" class="button" onCLick="zoomIn()">+</button>
    <button type="button" class="button" onCLick="zoomOut()">-</button>
 
+   <button type="button" class="button" onCLick="showHedvigsPlace()">Hedvig's favourite coffee shop</button>
+   <button type="button" class="button" onCLick="showPetrasPlace()">Petras bar</button>
+   <button type="button" class="button" onCLick="showSaladPlace()">Good salads!</button>
+   <button type="button" class="button" onCLick="showCoffeePlace()">Coffee here</button>
+
    <div>
      <p id="position"></p>
    </div>
@@ -114,82 +119,182 @@
         infowindow.open(map, marker);
       });
 
-google.maps.event.addListener(map, 'click', function(event) {
-  addMarker(event.latLng, map);
-});
-}
+      google.maps.event.addListener(map, 'click', function(event) {
+        addMarker(event.latLng, map);
+      });
+    }
 
-function zoomIn() {
-  map.setZoom(map.zoom + 1)
-}
+    function showHedvigsPlace() {
+      var infowindow = new google.maps.InfoWindow();
+      var service = new google.maps.places.PlacesService(map);
 
-function zoomOut() {
-  map.setZoom(map.zoom - 1)
-}
+      service.getDetails({
+        placeId: 'ChIJYyrB_kidX0YRNkbkxVxhMbE'
+      }, function(place, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(
+              '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
+              place.rating + '</br>' + 'Website: ' + 
+              '<a href=' + place.website + '>' + 'Himmelska hundar' + '</a>'
+               + '<br>' + '</br>' + 
+              place.formatted_address + '</div>');
+            infowindow.open(map, this);
+          });
+        }
+      });
+    }
 
-var x_start;
-var y_start;
+    function showPetrasPlace() {
 
-function start(event) {
-  x_start = event.clientX;
-  y_start = event.clientY;
-}
+      var infowindow = new google.maps.InfoWindow();
+      var service = new google.maps.places.PlacesService(map);
+
+      service.getDetails({
+        placeId: 'ChIJ29yfv1ydX0YRxfvb3T48q5U'
+      }, function(place, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(
+              '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
+              place.rating + '</br>' + 'Website: ' + 
+              '<a href=' + place.website + '>' + 'Spy Bar' + '</a>'
+               + '<br>' + '</br>' + 
+              place.formatted_address + '</div>');
+            infowindow.open(map, this);
+          });
+        }
+      });
+    }
+
+    function showSaladPlace() {
+      var infowindow = new google.maps.InfoWindow();
+      var service = new google.maps.places.PlacesService(map);
+
+      service.getDetails({
+        placeId: 'ChIJkxdoIUCdX0YR-qDZchTd8oA'
+      }, function(place, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(
+              '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
+              place.rating + '</br>' + 'Website: ' + 
+              '<a href=' + place.website + '>' + 'KTH Bibliotek' + '</a>'
+               + '<br>' + '</br>' + 
+              place.formatted_address + '</div>');
+            infowindow.open(map, this);
+          });
+        }
+      });
+    }
+
+    function showCoffeePlace() {
+       var infowindow = new google.maps.InfoWindow();
+      var service = new google.maps.places.PlacesService(map);
+
+      service.getDetails({
+        placeId: 'ChIJv7ezuG6dX0YRhybe0-Zx_aY'
+      }, function(place, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(
+              '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
+              place.rating + '</br>' + 'Website: ' + 
+              '<a href=' + place.website + '>' + 'Espresso House' + '</a>'
+               + '<br>' + '</br>' + 
+              place.formatted_address + '</div>');
+            infowindow.open(map, this);
+          });
+        }
+      });
+    }
+
+    function zoomIn() {
+      map.setZoom(map.zoom + 1)
+    }
+
+    function zoomOut() {
+      map.setZoom(map.zoom - 1)
+    }
+
+    var x_start;
+    var y_start;
+
+    function start(event) {
+      x_start = event.clientX;
+      y_start = event.clientY;
+    }
 
 
-function pan(event) {
-  console.log("slut");
-  var xpos = x_start - event.clientX;
-  var ypos = y_start - event.clientY;
-  map.panBy(xpos, ypos);
-}
+    function pan(event) {
+      var xpos = x_start - event.clientX;
+      var ypos = y_start - event.clientY;
+      map.panBy(xpos, ypos);
+    }
 
-function addMarker(location, map) {
-  var marker = new google.maps.Marker({
-    position: location,
-    map: map,
-    animation: google.maps.Animation.DROP,
-  });
-  marker.addListener('click', toggleBounce);
-}
-
-
-function toggleBounce() {
-  if (marker.getAnimation() !== null) {
-    marker.setAnimation(null);
-  } else {
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-  }
-}
+    function addMarker(location, map) {
+      var marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        animation: google.maps.Animation.DROP,
+      });
+      marker.addListener('click', toggleBounce);
+    }
 
 
-function myFunction() {
-  myVar = setTimeout(showPage, 1000);
-}
-
-function showPage() {
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("map").style.display = "block";
-}
-
-
-var position = document.getElementById("position");
-
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    position.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
-function showPosition(position) {
-  position.innerHTML = "Latitude: " + position.coords.latitude +
-  "<br>Longitude: " + position.coords.longitude;
-}
-console.log(position);
-console.log(navigator.geolocation.getCurrentPosition(showPosition));
+    function toggleBounce() {
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
 
 
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANJSROmnM72JZN35SRpGfFFTx7P4feqic&callback=initMap"></script>
+    function myFunction() {
+      myVar = setTimeout(showPage, 1000);
+    }
+
+    function showPage() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("map").style.display = "block";
+    }
+
+
+    var position = document.getElementById("position");
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+        console.log(getCurrentPosition(showPosition));
+      } else {
+        position.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+    function showPosition(position) {
+      position.innerHTML = "Latitude: " + position.coords.latitude +
+      "<br>Longitude: " + position.coords.longitude;
+    }
+
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANJSROmnM72JZN35SRpGfFFTx7P4feqic&callback=initMap&libraries=places"></script>
+
+
 </body>
 </html>
