@@ -17,14 +17,48 @@
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
-        height: 95%;
+        height: 94%;
         margin: 0.5%;
         padding: 0;
         background: grey;
       }
-      .button {
-        margin-top: 20;
+      #zoomIn {
+          position : absolute;
+          padding: 0.5% 1%;
+          top: 92.5%;
+          left: 45%;
       }
+      #zoomOut {
+          position : absolute;
+          padding: 0.5% 1%;
+          top: 92.5%;
+          left: 40%;
+      }
+      #left {
+          position : absolute;
+          padding: 0.5% 1%;
+          top: 92.5%;
+          left: 55%;
+      }
+      #down {
+          position : absolute;
+          padding: 0.5% 1%;
+          top: 95.5%;
+          left: 60%;
+      }
+      #right {
+          position : absolute;
+          padding: 0.5% 1%;
+          top: 92.5%;
+          left: 65%;
+      }
+      #up {
+          position : absolute;
+          padding: 0.5% 1%;
+          top: 89%;
+          left: 60%;
+      }
+      
       #loader {
         position: absolute;
         left: 50%;
@@ -73,10 +107,15 @@
   </head>
   <body onload="myFunction()" style="margin:0;">
 
-   <div id="loader"></div> 
-   <div id="map" draggable="true" onmousedown="start(event)" onmouseup="pan(event)" ontouchstart="start(event)" ontouchend="pan(event)"></div>
-   <button type="button" class="button" onCLick="zoomIn()">+</button>
-   <button type="button" class="button" onCLick="zoomOut()">-</button>
+      <div id="loader"></div> 
+      <div id="map" draggable="true" onmousedown="start(event)" onmouseup="pan(event)" ontouchstart="start(event)" ontouchend="pan(event)"></div>  
+      <button type="button" class="button" onCLick="zoomIn()" id ="zoomIn">+</button>
+      <button type="button" class="button" onCLick="zoomOut()" id="zoomOut">-</button>
+      
+      <button type="button" class="button" onCLick="up()" id="up">^</button>
+      <button type="button" class="button" onCLick="left()" id="left"><</button>
+      <button type="button" class="button" onCLick="right()" id="right">></button>
+      <button type="button" class="button" onCLick="down()" id="down">v</button>
 
    <button type="button" class="button" onCLick="showHedvigsPlace()">Hedvig's favourite coffee shop</button>
    <button type="button" class="button" onCLick="showPetrasPlace()">Petras bar</button>
@@ -119,7 +158,97 @@
         infowindow.open(map, marker);
       });
 
-      google.maps.event.addListener(map, 'click', function(event) {
+google.maps.event.addListener(map, 'click', function(event) {
+  addMarker(event.latLng, map);
+});
+}
+
+function zoomIn() {
+  map.setZoom(map.zoom + 1)
+}
+
+function zoomOut() {
+  map.setZoom(map.zoom - 1)
+}
+
+function right() {
+    map.panBy(100, 0);
+}   
+
+function left() {
+    map.panBy(-100, 0);
+}
+       
+function up() {
+    map.panBy(0, -100);
+}
+    
+function down() {
+    map.panBy(0, 100);
+}
+       
+var x_start;
+var y_start;
+
+function start(event) {
+  x_start = event.clientX;
+  y_start = event.clientY;
+}
+
+
+function pan(event) {
+  console.log("slut");
+  var xpos = x_start - event.clientX;
+  var ypos = y_start - event.clientY;
+  map.panBy(xpos, ypos);
+}
+
+function addMarker(location, map) {
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map,
+    animation: google.maps.Animation.DROP,
+  });
+  marker.addListener('click', toggleBounce);
+}
+
+
+function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+
+
+function myFunction() {
+  myVar = setTimeout(showPage, 1000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("map").style.display = "block";
+}
+
+
+var position = document.getElementById("position");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    position.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+function showPosition(position) {
+  position.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+}
+console.log(position);
+console.log(navigator.geolocation.getCurrentPosition(showPosition));
+
+google.maps.event.addListener(map, 'click', function(event) {
         addMarker(event.latLng, map);
       });
     }
@@ -223,78 +352,9 @@
           });
         }
       });
-    }
+    }        
 
-    function zoomIn() {
-      map.setZoom(map.zoom + 1)
-    }
-
-    function zoomOut() {
-      map.setZoom(map.zoom - 1)
-    }
-
-    var x_start;
-    var y_start;
-
-    function start(event) {
-      x_start = event.clientX;
-      y_start = event.clientY;
-    }
-
-
-    function pan(event) {
-      var xpos = x_start - event.clientX;
-      var ypos = y_start - event.clientY;
-      map.panBy(xpos, ypos);
-    }
-
-    function addMarker(location, map) {
-      var marker = new google.maps.Marker({
-        position: location,
-        map: map,
-        animation: google.maps.Animation.DROP,
-      });
-      marker.addListener('click', toggleBounce);
-    }
-
-
-    function toggleBounce() {
-      if (marker.getAnimation() !== null) {
-        marker.setAnimation(null);
-      } else {
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-      }
-    }
-
-
-    function myFunction() {
-      myVar = setTimeout(showPage, 1000);
-    }
-
-    function showPage() {
-      document.getElementById("loader").style.display = "none";
-      document.getElementById("map").style.display = "block";
-    }
-
-
-    var position = document.getElementById("position");
-
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-        console.log(getCurrentPosition(showPosition));
-      } else {
-        position.innerHTML = "Geolocation is not supported by this browser.";
-      }
-    }
-    function showPosition(position) {
-      position.innerHTML = "Latitude: " + position.coords.latitude +
-      "<br>Longitude: " + position.coords.longitude;
-    }
-
-  </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANJSROmnM72JZN35SRpGfFFTx7P4feqic&callback=initMap&libraries=places"></script>
-
-
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANJSROmnM72JZN35SRpGfFFTx7P4feqic&callback=initMap&libraries=places"></script>
 </body>
 </html>
