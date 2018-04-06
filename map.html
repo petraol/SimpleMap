@@ -260,103 +260,137 @@ console.log(navigator.geolocation.getCurrentPosition(showPosition));
       var infowindow = new google.maps.InfoWindow();
       var service = new google.maps.places.PlacesService(map);
 
-      service.getDetails({
-        placeId: 'ChIJYyrB_kidX0YRNkbkxVxhMbE'
-      }, function(place, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          var marker = new google.maps.Marker({
-            map: map,
-            position: place.geometry.location
-          });
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent(
-              '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
-              place.rating + '</br>' + 'Website: ' + 
-              '<a href=' + place.website + '>' + 'Himmelska hundar' + '</a>'
-               + '<br>' + '</br>' + 
-              place.formatted_address + '</div>');
-            infowindow.open(map, this);
-          });
-        }
+      var icon = {
+    url: 'https://www.iconexperience.com/_img/o_collection_png/green_dark_grey/256x256/plain/dog.png', // url
+    scaledSize: new google.maps.Size(40, 40), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(0, 0) // anchor
+  };
+
+  service.getDetails({
+    placeId: 'ChIJYyrB_kidX0YRNkbkxVxhMbE'
+  }, function(place, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+        icon: icon
+      });
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(
+          '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
+          place.rating + '</br>' + 'Website: ' + 
+          '<a href=' + place.website + '>' + 'Himmelska hundar' + '</a>'
+          + '<br>' + '</br>' + 
+          place.formatted_address + '</div>');
+        infowindow.open(map, this);
       });
     }
+  });
+}
 
-    function showPetrasPlace() {
+function showPetrasPlace() {
 
-      var infowindow = new google.maps.InfoWindow();
-      var service = new google.maps.places.PlacesService(map);
+  var infowindow = new google.maps.InfoWindow();
+  var service = new google.maps.places.PlacesService(map);
 
-      service.getDetails({
-        placeId: 'ChIJ29yfv1ydX0YRxfvb3T48q5U'
-      }, function(place, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          var marker = new google.maps.Marker({
-            map: map,
-            position: place.geometry.location
-          });
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent(
-              '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
-              place.rating + '</br>' + 'Website: ' + 
-              '<a href=' + place.website + '>' + 'Spy Bar' + '</a>'
-               + '<br>' + '</br>' + 
-              place.formatted_address + '</div>');
-            infowindow.open(map, this);
-          });
-        }
+  var icon = {
+    url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwvwa5FVWJmF0pJD-gLtFiW4-cC3d7FiPoU6HhkjX-zMl28fTm', // url
+    scaledSize: new google.maps.Size(40, 40), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(0, 0) // anchor
+  };
+
+  
+
+  service.getDetails({
+    placeId: 'ChIJ29yfv1ydX0YRxfvb3T48q5U'
+  }, function(place, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+        icon: icon
+      });
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(
+          '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
+          place.rating + '</br>' + 'Website: ' + 
+          '<a href=' + place.website + '>' + 'Spy Bar' + '</a>'
+          + '<br>' + '</br>' + 
+          place.formatted_address + '</div>');
+        infowindow.open(map, this);
       });
     }
+  });
+}
 
-    function showSaladPlace() {
-      var infowindow = new google.maps.InfoWindow();
-      var service = new google.maps.places.PlacesService(map);
+function showSaladPlace() {
+  var infowindow = new google.maps.InfoWindow();
+  var service = new google.maps.places.PlacesService(map);
 
-      service.getDetails({
-        placeId: 'ChIJkxdoIUCdX0YR-qDZchTd8oA'
-      }, function(place, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          var marker = new google.maps.Marker({
-            map: map,
-            position: place.geometry.location
-          });
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent(
-              '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
-              place.rating + '</br>' + 'Website: ' + 
-              '<a href=' + place.website + '>' + 'KTH Bibliotek' + '</a>'
-               + '<br>' + '</br>' + 
-              place.formatted_address + '</div>');
-            infowindow.open(map, this);
-          });
-        }
+  var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+  var icon = iconBase + 'library_maps.png';
+
+
+  service.getDetails({
+    placeId: 'ChIJkxdoIUCdX0YR-qDZchTd8oA'
+  }, function(place, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+        icon: icon
+      });
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(
+          '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
+          place.rating + '</br>' + 'Website: ' + 
+          '<a href=' + place.website + '>' + 'KTH Bibliotek' + '</a>'
+          + '<br>' + '</br>' + 
+          place.formatted_address + '</div>');
+        infowindow.open(map, this);
       });
     }
+  });
+}
 
-    function showCoffeePlace() {
-       var infowindow = new google.maps.InfoWindow();
-      var service = new google.maps.places.PlacesService(map);
+function showCoffeePlace() {
+ var infowindow = new google.maps.InfoWindow();
+ var service = new google.maps.places.PlacesService(map);
 
-      service.getDetails({
-        placeId: 'ChIJv7ezuG6dX0YRhybe0-Zx_aY'
-      }, function(place, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          var marker = new google.maps.Marker({
-            map: map,
-            position: place.geometry.location
-          });
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent(
-              '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
-              place.rating + '</br>' + 'Website: ' + 
-              '<a href=' + place.website + '>' + 'Espresso House' + '</a>'
-               + '<br>' + '</br>' + 
-              place.formatted_address + '</div>');
-            infowindow.open(map, this);
-          });
-        }
+
+ var icon = {
+    url: 'http://www.sydneytosurfers.org.au/wp-content/uploads/2017/03/coffee_icon.jpg', // url
+    scaledSize: new google.maps.Size(40, 40), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(0, 0) // anchor
+  };
+
+
+
+  service.getDetails({
+    placeId: 'ChIJv7ezuG6dX0YRhybe0-Zx_aY'
+  }, function(place, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+        icon: icon
+      });
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(
+          '<div><strong>' + place.name + '</strong><br>' +  place.formatted_address + '<br>Rating: ' + 
+          place.rating + '</br>' + 'Website: ' + 
+          '<a href=' + place.website + '>' + 'Espresso House' + '</a>'
+          + '<br>' + '</br>' + 
+          place.formatted_address + '</div>');
+        infowindow.open(map, this);
       });
     }
-
+  });
+}
+     
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANJSROmnM72JZN35SRpGfFFTx7P4feqic&callback=initMap&libraries=places""></script>
 </body>
