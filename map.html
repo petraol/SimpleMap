@@ -108,6 +108,7 @@
         font-size:60%;
         padding:16px 31px;
         text-decoration:none;
+        margin-top: 10px;
       }
       .button:hover {
         background-color:#476e9e;
@@ -209,7 +210,8 @@
   <body onload="myFunction()" style="margin:0;">
 
     <div id="loader"></div> 
-    <div id="map" draggable="true" ></div> 
+    <div id="map"></div> 
+    <!--<div id="map" onmousedown="start(event)" onmouseup="pan(event)" ontouchstart="start(event)" ontouchend="pan(event)"> </div> -->
 
     <button type="button" class="button" onCLick="getLocation()" id ="location">Find my location</button>
 
