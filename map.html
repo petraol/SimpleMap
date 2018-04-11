@@ -209,7 +209,7 @@
   <body onload="myFunction()" style="margin:0;">
 
     <div id="loader"></div> 
-    <div id="map" draggable="true" onmousedown="start(event)" onmouseup="pan(event)" ontouchstart="start(event)" ontouchend="pan(event)"></div> 
+    <div id="map" draggable="true" ></div> 
 
     <button type="button" class="button" onCLick="getLocation()" id ="location">Find my location</button>
 
@@ -244,8 +244,6 @@
         mapTypeId: 'satellite',
         heading: 90,
         tilt: 45,
-        zoomControl: false,
-        draggable: false,
         disableDefaultUI: true
       });
 
