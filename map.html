@@ -76,30 +76,24 @@
         animation: spin 2s linear infinite;
       }
 
-      #locate {
+      .locate {
         background-color:#7892c2;
+        color:#ffffff;
+        cursor:pointer;
+        text-decoration:none;
+        border:1px solid #4e6096;
         -moz-border-radius:28px;
         -webkit-border-radius:28px;
         border-radius:28px;
-        border:1px solid #4e6096;
-        display:inline-block;
-        cursor:pointer;
-        color:#ffffff;
-        font-size:15px;
-        padding:4px 7px;
-        text-decoration:none;
-        height: 30%;
-        width: 20%;
+        
       }
-      #locate:hover {
+      .locate:hover {
         background-color:#476e9e;
       }
-      #locate:active {
+      .locate:active {
         position:relative;
         top:1px;
       }
-
-
 
       .button {
         
@@ -111,7 +105,7 @@
         display:inline-block;
         cursor:pointer;
         color:#ffffff;
-        font-size:17px;
+        font-size:60%;
         padding:16px 31px;
         text-decoration:none;
       }
@@ -127,22 +121,14 @@
       /* Dropdown Button */
       .dropbtn {
         background-color:#7892c2;
-        color: white;
-        padding: 16px;
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
-        font-family: 'Montserrat', sans-serif;
+        color:#ffffff;
+        cursor:pointer;
+        text-decoration:none;
+        border:1px solid #4e6096;
         -moz-border-radius:28px;
         -webkit-border-radius:28px;
         border-radius:28px;
-        border:1px solid #4e6096;
-        display:inline-block;
-        cursor:pointer;
-        color:#ffffff;
-        font-size:17px;
-        padding:16px 31px;
-        text-decoration:none;
+
       }
 
       /* Dropdown button on hover & focus */
@@ -154,6 +140,7 @@
       .dropdown {
         position: relative;
         display: inline-block;
+
       }
 
       /* Dropdown Content (Hidden by Default) */
@@ -161,10 +148,20 @@
         display: none;
         position: absolute;
         background-color: #f1f1f1;
-        min-width: 160px;
+        min-width: 150px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
         bottom: 100%;
+        font-size: 60%;
+
+        background-color:#7892c2;
+        color:#ffffff;
+        cursor:pointer;
+        text-decoration:none;
+        border:1px solid #4e6096;
+        -moz-border-radius:28px;
+        -webkit-border-radius:28px;
+        border-radius:28px;
       }
 
       /* Links inside the dropdown */
@@ -216,16 +213,16 @@
 
     <button type="button" class="button" onCLick="getLocation()" id ="location">Find my location</button>
 
-    <button type="button" class="button" onCLick="zoomIn()" id ="zoomIn locate">+</button>
-    <button type="button" class="button" onCLick="zoomOut()" id="zoomOut locate">-</button>
+    <button type="button" class="locate" onCLick="zoomIn()" id ="zoomIn">+</button>
+    <button type="button" class="locate" onCLick="zoomOut()" id="zoomOut">-</button>
 
-    <button type="button" class="button" onCLick="up()" id="up locate">^</button>
-    <button type="button" class="button" onCLick="left()" id="left locate">&lt;</button>
-    <button type="button" class="button" onCLick="right()" id="right locate">></button>
-    <button type="button" class="button" onCLick="down()" id="down locate">v</button>
+    <button type="button" class="locate" onCLick="up()" id="up">^</button>
+    <button type="button" class="locate" onCLick="left()" id="left">&lt;</button>
+    <button type="button" class="locate" onCLick="right()" id="right">></button>
+    <button type="button" class="locate" onCLick="down()" id="down">v</button>
 
     <div class="dropdown">
-      <button onclick="dropDownClick()" class="dropbtn">Places ^ </button>
+      <button onclick="dropDownClick()" class="dropbtn button">Places ^ </button>
       <div id="myDropdown" class="dropdown-content">
         <p onClick="showHedvigsPlace()">Hedvig's favourite coffee shop</p>
         <p onClick="showPetrasPlace()">Petras bar</p>
